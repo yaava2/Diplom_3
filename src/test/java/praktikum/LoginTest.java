@@ -13,17 +13,14 @@ import static praktikum.pages.PasswordRecoveryPage.PASSWORD_RECOVERY_URL;
 public class LoginTest extends UserApi {
     private WebDriver driver;
     String accessToken;
-    private praktikum.pages.User User;
     User user = User.random();
 
     @Before
     public void startWork (){
         DriverFactory driverFactory = new DriverFactory();
-        if ("firefox".equals(System.getProperty("browser"))){
-            driver = driverFactory.startFirefox();
-        } else {
-            driver = driverFactory.startChrome();
-        }
+        driverFactory.browserSelection();
+        driver = driverFactory.driver;
+
         this.accessToken = createStellarUser(user);
     }
 

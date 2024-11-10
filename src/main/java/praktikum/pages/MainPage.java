@@ -19,6 +19,10 @@ public class MainPage {
     private static final By PERSONAL_ACCOUNT_BUTTON = By.xpath(".//*[@id=\"root\"]/div/header/nav/a/p");
     private static final By PROFILE_BUTTON= By.className("Account_link_active__2opc9");
 
+    private static final By BUNS_TAB = By.cssSelector(".tab_tab__1SPyG:nth-child(1)");
+    private static final By SAUCES_TAB = By.cssSelector(".tab_tab__1SPyG:nth-child(2)");
+    private static final By INGREDIENTS_TAB = By.cssSelector(".tab_tab__1SPyG:nth-child(3)");
+
     public MainPage(WebDriver driver){
         this.driver=driver;
     }
@@ -78,6 +82,37 @@ public class MainPage {
         return this;
     }
 
+    @Step("переход к разделу Булки")
+    public MainPage openBunsTab() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(BUNS_TAB));
 
+        driver.findElement(SAUCES_TAB).click();
+        driver.findElement(BUNS_TAB).click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.attributeContains(BUNS_TAB, "class", "current"));
+        return this;
+    }
 
+    @Step("переход к разделу Соусы")
+    public MainPage openSaucesTab() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(BUNS_TAB));
+
+        driver.findElement(SAUCES_TAB).click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.attributeContains(SAUCES_TAB, "class", "current"));
+        return this;
+    }
+
+    @Step("переход к разделу Начинки")
+    public MainPage openIngredientsTab() {
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.visibilityOfElementLocated(BUNS_TAB));
+
+        driver.findElement(INGREDIENTS_TAB).click();
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.attributeContains(INGREDIENTS_TAB, "class", "current"));
+        return this;
+    }
 }

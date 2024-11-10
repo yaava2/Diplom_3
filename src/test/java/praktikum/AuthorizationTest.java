@@ -6,19 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.devtools.DevTools;
-import org.openqa.selenium.devtools.v128.network.Network;
 import praktikum.pages.AuthorizationPage;
 import praktikum.pages.UserApi;
-
-import java.util.Optional;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import static org.junit.Assert.assertEquals;
 import static praktikum.pages.AuthorizationPage.AUTHORIZATION_URL;
-import static praktikum.pages.LoginPage.LOGIN_URL;
 
 public class AuthorizationTest extends UserApi {
     private WebDriver driver;
@@ -27,11 +17,8 @@ public class AuthorizationTest extends UserApi {
     @Before
     public void startWork (){
         DriverFactory driverFactory = new DriverFactory();
-        if ("firefox".equals(System.getProperty("browser"))){
-            driver = driverFactory.startFirefox();
-        } else {
-            driver = driverFactory.startChrome();
-        }
+        driverFactory.browserSelection();
+        driver = driverFactory.driver;
         driver.get(AUTHORIZATION_URL);
     }
 

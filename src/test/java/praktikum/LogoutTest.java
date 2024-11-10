@@ -20,11 +20,9 @@ public class LogoutTest extends UserApi {
     @Before
     public void startWork (){
         DriverFactory driverFactory = new DriverFactory();
-        if ("firefox".equals(System.getProperty("browser"))){
-            driver = driverFactory.startFirefox();
-        } else {
-            driver = driverFactory.startChrome();
-        }
+        driverFactory.browserSelection();
+        driver = driverFactory.driver;
+
         this.accessToken = createStellarUser(user);
         driver.get(LOGIN_URL);
         LoginPage loginPage = new LoginPage(driver, user.getEmail(), user.getPassword());

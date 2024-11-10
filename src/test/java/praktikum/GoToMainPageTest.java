@@ -11,17 +11,14 @@ import static praktikum.pages.LoginPage.LOGIN_URL;
 public class GoToMainPageTest extends UserApi {
     private WebDriver driver;
     String accessToken;
-    private praktikum.pages.User User;
     praktikum.pages.User user = User.random();
 
     @Before
     public void startWork (){
         DriverFactory driverFactory = new DriverFactory();
-        if ("firefox".equals(System.getProperty("browser"))){
-            driver = driverFactory.startFirefox();
-        } else {
-            driver = driverFactory.startChrome();
-        }
+        driverFactory.browserSelection();
+        driver = driverFactory.driver;
+
         this.accessToken = createStellarUser(user);
         driver.get(LOGIN_URL);
         LoginPage loginPage = new LoginPage(driver, user.getEmail(), user.getPassword());
